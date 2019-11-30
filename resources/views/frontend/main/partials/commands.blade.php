@@ -1,4 +1,4 @@
-<h4> Listado de comandos, para extraer información del servidor </h4>
+
 <p>A continuación se presenta el listado de comandos utilizados para extraer la información del servidor mostrada en el Dashboard:</p>
 
 <table class="table">
@@ -10,12 +10,12 @@
 	</thead>
 	<tbody>
 		<tr> 
-			<td scope="row">Versión de sistema operativo</td>
+			<td scope="row">Versión sistema operativo</td>
 			<td><code>cat /etc/issue</code></td>
 			
 		</tr>	
 		<tr> 
-			<td scope="row">Versión del kernel de linux</td>
+			<td scope="row">Versión kernel de linux</td>
 			<td><code>uname -r</code></td>
 			
 		</tr>	

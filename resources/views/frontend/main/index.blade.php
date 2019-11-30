@@ -11,6 +11,7 @@
 	        <div class="card">
 	          <div class="card-body">
 	            <h3>Caracteristicas del servidor</h3>
+	            <br>
 	            A continuación se presentan las principales caracteristicas del servidor y algunas estadisticas del rendimiento:
 	            <br><br>
 	            <table class="table">
@@ -81,4 +82,6 @@
 			</div>
 		</div>
 	</div>
+
+	<br><br><br><br>
 @endsection
