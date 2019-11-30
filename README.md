@@ -1,78 +1,51 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## Monitor Unix
 
-## About Laravel
+**Monitor Unix** es un aplicativo desarrollado en Laravel 6.0 (https://laravel.com/docs) para monitorear el estado de un servidor con sistema operativo Linux, los datos que puede ver en el monitor son:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
+- Verion del sistema operativo
+- Version del kernel de linux
+- Porcentaje de uso de la CPU
+- Porcentaje de uso de la memoria RAM
+- Porcentaje de uso del disco duro
+- IP pública
+- IP privada
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+## Instalación del aplicativo
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Prerequisitos
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Para instalar este aplicativo, el servidor debe contar con los siguientes prerequisitos
 
-## Laravel Sponsors
+	- PHP version 7.2 o superior (para instalarlo en Ubuntu puede ejecutar el comando "$ apt-get install php" y ademas las dependencias: "$ sudo apt-get install php-gd php-xml php7.2-mbstring php-fpm")
+	- NodeJS (para instalarlo en Ubuntu puede seguir esta guía https://joshtronic.com/2018/05/08/how-to-install-nodejs-10-on-ubuntu-1804-lts)
+	- PHP Composer (para instalarlo en Ubuntu puede seguir esta guía https://linuxize.com/post/how-to-install-and-use-composer-on-ubuntu-18-04/)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### Instalación y configuración
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
+	- Primero debe clonar el repositorio de Git
+	- Dar permisos "chmod -R 777" a las carpetas /storage y /boostrap/cache
+	- Ejecutar el comando npm install
+	- Ejecutar el comando composer install
+	- Configurar el servidor para acceder al archivo /public/index.php. En el caso de Ningx configure el archivo "/etc/nginx/sites-enabled/default" así:
 
-## Contributing
+		server {
+	        listen 8088 default_server;
+	        listen [::]:8088 default_server;
+			# root /var/www/html;
+	        root /home/ubuntu/monitorUnix/public;
+	        # Add index.php to the list if you are using PHP
+	        index index.php index.html index.htm index.nginx-debian.html;
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+	        server_name _;
 
-## Code of Conduct
+	        location / {
+	                # First attempt to serve request as file, then
+	                # as directory, then fall back to displaying a 404.
+	                # try_files $uri $uri/ =404;
+	                try_files $uri $uri/ /index.php?$query_string;
+	        }
+	    }
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+    Finalmente reinicie el servidor $
