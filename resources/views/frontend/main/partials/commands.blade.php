@@ -23,8 +23,6 @@
 			<td scope="row">Obtener IP pública:</td>
 			<td>
 				<code>curl ifconfig.me</code>
-				<br><br>
-				Es necesario instalar CURL antes: <br><code>sudo apt-get install curl</code>
 			</td>
 		</tr>	
 		<tr> 
