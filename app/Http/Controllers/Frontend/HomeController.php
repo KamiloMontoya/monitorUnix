@@ -19,7 +19,8 @@ class HomeController extends Controller
     		'ram_use' => (double) shell_exec("free -m -h -t | grep T | awk '{usage=($3*100)/$2} END {print usage}'"),
     		'cpu_use' => (double) shell_exec("grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage}'"),
     		'ip_public' => preg_replace("/\r|\n/", "", shell_exec('curl ifconfig.me')),
-    		'ip_private' => preg_replace("/\r|\n/", "", shell_exec('hostname -I'))
+    		'ip_private' => preg_replace("/\r|\n/", "", shell_exec("hostname -I | awk '{print $1}'
+"))
     	);
 
 
