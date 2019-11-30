@@ -71,7 +71,7 @@
 					          	<div class="dot-indicator bg-info mr-2"></div>
 					          	<p class="mb-0">Espacio en Disco duro</p>
 					        </div>
-					        <h4 class="font-weight-semibold">{{ $disk }}</h4>
+					        <h4 class="font-weight-semibold">{{ $disk }} %</h4>
 					        <div class="progress progress-md">
 					          	<div class="progress-bar bg-info" role="progressbar" style="width: {{ $disk }}%" aria-valuenow="{{ $disk }}" aria-valuemin="0" aria-valuemax="{{ $disk }}"></div>
 					        </div>
