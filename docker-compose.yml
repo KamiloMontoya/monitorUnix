@@ -1,0 +1,30 @@
+version: '2'
+services:
+#PHP Service
+  app:
+    build:
+      context: .
+      dockerfile: DockerfileCompose
+    image: php_service
+    container_name: monitor_unix
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - app-network
+#Nginx Service
+  webserver:
+    image: nginx
+    container_name: webserver
+    ports:
+      - "8890:80"
+    volumes:
+      - ./:/var/www
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - app-network
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
