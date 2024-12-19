@@ -1,53 +1,86 @@
+# Unix Monitor
 
-## Monitor Unix
+**Unix Monitor** is an application developed in Laravel 6.0 (https://laravel.com/docs) designed to monitor the status of a server running a Linux operating system. The monitor provides the following details:  
 
-**Monitor Unix** es un aplicativo desarrollado en Laravel 6.0 (https://laravel.com/docs) para monitorear el estado de un servidor con sistema operativo Linux, los datos que puede ver en el monitor son:
+- Operating system version  
+- Linux kernel version  
+- CPU usage percentage  
+- RAM usage percentage  
+- Disk usage percentage  
+- Public IP address  
+- Private IP address  
 
-- Verion del sistema operativo
-- Version del kernel de linux
-- Porcentaje de uso de la CPU
-- Porcentaje de uso de la memoria RAM
-- Porcentaje de uso del disco duro
-- IP pública
-- IP privada
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Laravel is accessible, powerful, and provides the necessary tools to build robust, large-scale applications.  
 
-## Instalación del aplicativo
+---
 
-### Prerequisitos
+## Application Installation  
 
-Para instalar este aplicativo, el servidor debe contar con los siguientes prerequisitos
+### Prerequisites  
 
-- PHP version 7.2 o superior (para instalarlo en Ubuntu puede ejecutar el comando "$ apt-get install php" y ademas las dependencias: "$ sudo apt-get install php-gd php-xml php7.2-mbstring php-fpm")
-- NodeJS (para instalarlo en Ubuntu puede seguir esta guía https://joshtronic.com/2018/05/08/how-to-install-nodejs-10-on-ubuntu-1804-lts)
-- PHP Composer (para instalarlo en Ubuntu puede seguir esta guía https://linuxize.com/post/how-to-install-and-use-composer-on-ubuntu-18-04/)
+Ensure the server meets the following prerequisites before installing the application:  
 
-### Instalación y configuración
+- **PHP Version 7.2 or higher**  
+  - Install on Ubuntu:  
+    ```bash
+    $ apt-get install php  
+    $ sudo apt-get install php-gd php-xml php7.2-mbstring php-fpm  
+    ```  
 
-- Primero debe clonar el repositorio de Git
-- Dar permisos "chmod -R 777" a las carpetas /storage y /boostrap/cache
-- Ejecutar el comando npm install
-- Ejecutar el comando composer install
-- Copar la configuración por defecto $cp .env.prod .env
-- Configurar el servidor para acceder al archivo /public/index.php. En el caso de Ningx configure el archivo "/etc/nginx/sites-enabled/default" así:
+- **Node.js**  
+  - Follow [this guide](https://joshtronic.com/2018/05/08/how-to-install-nodejs-10-on-ubuntu-1804-lts) to install Node.js on Ubuntu.  
 
-		server {
-	        listen 8088 default_server;
-	        listen [::]:8088 default_server;
-			# root /var/www/html;
-	        root /home/ubuntu/monitorUnix/public;
-	        # Add index.php to the list if you are using PHP
-	        index index.php index.html index.htm index.nginx-debian.html;
+- **PHP Composer**  
+  - Follow [this guide](https://linuxize.com/post/how-to-install-and-use-composer-on-ubuntu-18-04/) to install Composer on Ubuntu.  
 
-	        server_name _;
+---
 
-	        location / {
-	                # First attempt to serve request as file, then
-	                # as directory, then fall back to displaying a 404.
-	                # try_files $uri $uri/ =404;
-	                try_files $uri $uri/ /index.php?$query_string;
-	        }
-	    }
+### Installation and Configuration  
 
-Finalmente reinicie el servidor $ sudo systemctl restart nginx
+Follow these steps to install and configure the application:  
 
+1. Clone the Git repository:  
+   ```bash  
+   $ git clone <repository_url>  
+   ```  
+
+2. Set permissions:  
+   ```bash  
+   $ chmod -R 777 /storage /bootstrap/cache  
+   ```  
+
+3. Install Node.js dependencies:  
+   ```bash  
+   $ npm install  
+   ```  
+
+4. Install PHP dependencies:  
+   ```bash  
+   $ composer install  
+   ```  
+
+5. Copy the default environment configuration:  
+   ```bash  
+   $ cp .env.prod .env  
+   ```  
+
+6. Configure the server to serve the `/public/index.php` file. For Nginx, update the `/etc/nginx/sites-enabled/default` file with the following configuration:  
+   ```nginx  
+   server {  
+       listen 8088 default_server;  
+       listen [::]:8088 default_server;  
+       root /home/ubuntu/monitorUnix/public;  
+       index index.php index.html index.htm;  
+
+       server_name _;  
+
+       location / {  
+           try_files $uri $uri/ /index.php?$query_string;  
+       }  
+   }  
+   ```  
+
+7. Restart the Nginx server:  
+   ```bash  
+   $ sudo systemctl restart nginx  
+   ```  
